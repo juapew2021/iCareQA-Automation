@@ -1,0 +1,26 @@
+Crear la cuenta de Github
+Crear el respositorio
+Invitar al QA Dev Tester
+Descargar el software visual Studio code
+Lo abrimos y desde la consola validamos si tenemos GIT en la maquina local ( Consola - Comando:  Git Status
+Si aparece : git : El término 'git' no se reconoce como nombre de un cmdlet, función, archivo de script o programa ejecutable. Compruebe si escribió correctamente el nombre o, si 
+incluyó una ruta de acceso, compruebe que dicha ruta es correcta e inténtelo de nuevo.
+En línea: 1 Carácter: 1
++ git status
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (git:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+Significa que no lo tienes instalado por lo cual :
+Se descarga y se instala https://git-scm.com/install/windows
+Se instala todo por Default
+Se cierra en Visual Studio 
+Se vuelve abri 
+y en la consola se vuelve a poner el comando : Git status 
+y deberia de aparecer : git status
+fatal: not a git repository (or any of the parent directories): .git
+
+OK
+Seguimos ...
+
+
+
