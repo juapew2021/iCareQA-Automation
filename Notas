@@ -27,5 +27,101 @@ Instalamos Github Desktop para manejar visualmente ramas y commits
 Seleccionamos el FrameWord de automatización (webDirverIO)
 Arranco con la instalación de la libreria webDirverIO
 
+05/01/2026
+
+Instalar Appium + Driver UiAutomator2
+
+npm i -g appium
 
 
+Si sale el siguinete error 
+
+npm : No se puede cargar el archivo C:\Program Files\nodejs\npm.ps1 porque la ejecución de scripts está deshabilitada en este sistema. Para obtener más información, consulta el tema about_Execution_Policies en https:/go.microsoft.com/fwlink/?LinkID=135170. En línea: 1 Carácter: 1 + npm i -g appium + ~~~ + CategoryInfo : SecurityError: (:) [], PSSecurityException + FullyQualifiedErrorId : UnauthorizedAccess
+
+avanza con : 
+
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+
+si te pregunta pones Y o Si
+
+luego ejecutas npm i -g appium
+
+y validas que se ha instalado con appium -v
+
+luego ejecutas appium driver install uiautomator2
+
+listar el driver
+
+appium driver list
+
+Ahora instalamos el paquete de webdriverIO
+
+npx wdio config
+
+* Validamos si se lista el emulador
+adb devices si aparece el siguiente mensaje --> List of devices attached
+
+se ejecuta --> adb devices de nuevo teniendo el android studio levantado con el simulador
+
+se copia el nombre del dispositivo en el wdio.conf.js
+
+emulator-5554
+
+Paso a seguir, Estructura recomendada para POM (Page object Model) (POM + Cucumber + WebdriverIOS + Appium, Reporte Allure Report)
+
+Estructura:
+
+config/
+│
+├─ package.json  -- > OK
+├─ wdio.conf.js  --> OK
+├─ .gitignore --> OK
+├─ README.md
+│
+├─ apps/                         # APK/IPA (si aplica)
+│   └─ myapp.apk
+│
+├─ config/                       # configuración por entorno
+│   ├─ capabilities.android.js
+│   ├─ capabilities.ios.js
+│   └─ env.dev.json
+│
+├─ features/                     # Gherkin
+│   ├─ login/
+│   │   ├─ login.feature
+│   │   └─ login.data.json       # (opcional) data-driven por feature
+│   └─ common/
+│       └─ smoke.feature
+│
+├─ step-definitions/             # steps Cucumber (solo orquestan)
+│   ├─ login.steps.js
+│   └─ hooks.steps.js            # Before/After (si lo prefieres aquí)
+│
+├─ pageobjects/                  # POM
+│   ├─ base/
+│   │   ├─ BasePage.js           # métodos comunes (tap, type, wait...)
+│   │   └─ selectors.js          # (opcional) utilidades de selectores
+│   │
+│   ├─ screens/                  # páginas/pantallas
+│   │   ├─ LoginScreen.js
+│   │   ├─ HomeScreen.js
+│   │   └─ SettingsScreen.js
+│   │
+│   └─ components/               # componentes reusables (navbar, modal, etc.)
+│       ├─ PermissionModal.js
+│       └─ BottomNav.js
+│
+├─ testdata/                     # datos globales (usuarios, etc.)
+│   ├─ users.json
+│   └─ fixtures.json
+│
+├─ utils/                        # utilidades
+│   ├─ wait.js
+│   ├─ logger.js
+│   ├─ env.js
+│   └─ random.js
+│
+└─ reports/                      # evidencias
+    ├─ screenshots/
+    ├─ videos/                   # (si grabas)
+    └─ allure-results/           # (si usas allure)
