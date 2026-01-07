@@ -37,7 +37,6 @@ Instalar Appium + Driver UiAutomator2
 
 npm i -g appium
 
->>>>>>> JP
 
 Si sale el siguinete error 
 
