@@ -1,23 +1,30 @@
 const { Given, When, Then } = require('@wdio/cucumber-framework');
-const { expect, $ } = require('@wdio/globals')
+const assert = require('assert');
+const allure = require('@wdio/allure-reporter').default;
 
-const LoginPage = require('../pageobjects/login.page');
-const SecurePage = require('../pageobjects/secure.page');
+const LaunchScreen = require('../pageobjects/screens/LaunchScreen');
 
-const pages = {
-    login: LoginPage
-}
+const APP_PACKAGE = 'com.company.icarev2';
 
-Given(/^I am on the (\w+) page$/, async (page) => {
-    await pages[page].open()
+Given('the application is installed on the device', async () => {
+  const installed = await driver.isAppInstalled(APP_PACKAGE);
+  assert.ok(installed, `La aplicación NO está instalada: ${APP_PACKAGE}`);
 });
 
-When(/^I login with (\w+) and (.+)$/, async (username, password) => {
-    await LoginPage.login(username, password)
+When('the user opens the application', async () => {
+  await driver.terminateApp(APP_PACKAGE);
+  await driver.execute('mobile: activateApp', { appId: APP_PACKAGE });
 });
 
-Then(/^I should see a flash message saying (.*)$/, async (message) => {
-    await expect(SecurePage.flashAlert).toBeExisting();
-    await expect(SecurePage.flashAlert).toHaveText(expect.stringContaining(message));
-});
+Then('the application should launch successfully', async () => {
+  // ✅ Validación real por UI (tu botón Continue)
+  await LaunchScreen.assertLaunched();
 
+  // 📸 Screenshot “en el momento de la aserción” + adjunto a Allure
+  const screenshot = await browser.takeScreenshot();
+  allure.addAttachment(
+    'Assertion - App Launched',
+    Buffer.from(screenshot, 'base64'),
+    'image/png'
+  );
+});

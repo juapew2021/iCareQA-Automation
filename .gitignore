@@ -1,3 +1,5 @@
+# Ignore Android Studio project files
+Reports/
 # Gradle files
 .gradle/
 build/

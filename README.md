@@ -54,3 +54,15 @@ config/
     ├─ screenshots/
     ├─ videos/                   # (si grabas)
     └─ allure-results/           # (si usas allure)
+
+    # Generar el reporte
+
+    allure generate reports/allure-results --clean -o reports/allure-report
+
+    allure open reports/allure-report
+
+    Para Ejecutar:
+
+    npm run test:smoke
+    npm run allure:generate
+    npm run allure:open
