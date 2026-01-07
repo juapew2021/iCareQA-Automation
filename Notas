@@ -129,3 +129,10 @@ config/
     ├─ screenshots/
     ├─ videos/                   # (si grabas)
     └─ allure-results/           # (si usas allure)
+
+    Necesitamos setear por consola en windows
+
+$env:ANDROID_SDK_ROOT="C:\Users\JuanPablo\AppData\Local\Android\Sdk"
+$env:ANDROID_HOME="C:\Users\JuanPablo\AppData\Local\Android\Sdk"
+$env:Path="$env:ANDROID_SDK_ROOT\platform-tools;$env:Path"
+

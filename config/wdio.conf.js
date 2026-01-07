@@ -52,11 +52,17 @@ exports.config = {
     //
     capabilities: [{
         // capabilities for local Appium web tests on an Android Emulator
-        platformName: 'Android',
-        browserName: 'Chrome',
-        'appium:deviceName': 'emulator-5554',
-        'appium:platformVersion': '12.0',
-        'appium:automationName': 'UiAutomator2'
+       
+  "platformName": "Android",
+  "appium:automationName": "UiAutomator2",
+  "appium:deviceName": "emulator-5554",
+  "appium:udid": "emulator-5554",
+  "appium:app": "C:\\Users\\JuanPablo\\Documents\\GitHub\\iCareQA-Automation\\config\\apps\\iCare-release.apk",
+  "appium:autoGrantPermissions": true,
+  "appium:noReset": true,
+  "appium:newCommandTimeout": 120
+
+
     }],
 
     //
