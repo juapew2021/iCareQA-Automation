@@ -14,18 +14,18 @@ exports.config = {
   maxInstances: 1,
 
   capabilities: [{
-    platformName: 'Android',
-    'appium:automationName': 'UiAutomator2',
-    'appium:deviceName': 'emulator-5554',
-    'appium:udid': 'emulator-5554',
+    platformName: "Android",
+    "appium:automationName": "UiAutomator2",
+    "appium:deviceName": "emulator-5554",
+    "appium:udid": "emulator-5554",
 
-    'appium:app': 'C:\\Users\\JuanPablo\\Documents\\GitHub\\iCareQA-Automation\\config\\apps\\iCare-release.apk',
-    'appium:appPackage': 'com.company.icarev2',
-    'appium:appActivity': 'com.company.icarev2.MainActivity',
+    "appium:app": "C:\\Users\\Kezman\\Documents\\GitHub\\iCareQA-Automation\\app\\Android\\iCare-release.apk",
+    "appium:appPackage": "com.company.icarev2",
+    "appium:appActivity": "com.company.icarev2.MainActivity",
 
-    'appium:autoGrantPermissions': true,
-    'appium:noReset': true,
-    'appium:newCommandTimeout': 120
+    "appium:autoGrantPermissions": true,
+    "appium:noReset": true,
+    "appium:newCommandTimeout": 120
   }],
 
   logLevel: 'info',
