@@ -1,0 +1,9 @@
+{
+    "users": {
+        "admin": {
+        "email": "admin@icare.com",
+        "password": "admin123"
+        }
+    }
+
+}    

@@ -78,7 +78,8 @@ async enterUsername(email) {
 
   // Escribir email en el campo con foco
   await driver.keys(email);
-
+// Esconder teclado si está abierto
+try { await driver.hideKeyboard(); } catch (_) {}
   
 }
 
@@ -107,7 +108,8 @@ async enterUsername(email) {
 
   // Escribir email en el campo con foco
   await driver.keys(password);
-
+// Esconder teclado si está abierto
+try { await driver.hideKeyboard(); } catch (_) {}
 }
 
   async submitLogin() {
