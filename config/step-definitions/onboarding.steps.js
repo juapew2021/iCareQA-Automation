@@ -3,7 +3,7 @@ const assert = require('assert');
 const allure = require('@wdio/allure-reporter').default;
 
 const OnboardingScreen = require('../pageobjects/screens/OnboardingScreen');
-const NextOnboardingScreen = require('../pageobjects/screens/NextOnboardingScreen');
+const NextScreen = require('../pageobjects/screens/NextScreen');
 
 const APP_PACKAGE = 'com.company.icarev2';
 
@@ -42,7 +42,7 @@ When('the user clicks the continue {int} times', async (times) => {
 });
 
 Then('the user should proceed to the next onboarding screen', async () => {
-  await NextOnboardingScreen.assertLoaded();
+  await NextScreen.assertLoaded();
 
   const shot = await browser.takeScreenshot();
   allure.addAttachment('Next onboarding screen', Buffer.from(shot, 'base64'), 'image/png');

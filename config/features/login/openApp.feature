@@ -1,4 +1,4 @@
-@smoke
+@open
 Feature: Open Application and Login
 
   Scenario: The application is opened and user attempts to login
