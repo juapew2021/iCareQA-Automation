@@ -151,11 +151,6 @@ exports.config = {
     }
 
     // 🗑️ Desinstalar app
-    try {
-      await driver.removeApp(APP_PACKAGE);
-      console.log(`🗑️ App desinstalada: ${APP_PACKAGE}`);
-    } catch (err) {
-      console.warn(`⚠️ No se pudo desinstalar ${APP_PACKAGE}: ${err.message}`);
-    }
+   
   },
 };

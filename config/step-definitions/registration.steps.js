@@ -67,12 +67,13 @@ Given('The user creates a new account', async () => {
   });
 
   When('The user chooses avatar', async () => {
-    await driver.pause(3000);
+    await driver.pause(10000);
     await RegistrationScreen.enterSelectAvatar();
-    await driver.pause(3000);
+    await driver.pause(10000);
     await RegistrationScreen.tapCreateButton();
   });
 
   Then('The user views the confirmation screen registration', async () => {
+    await driver.pause(10000);
     await RegistrationScreen.loadconfirmView();
   });
