@@ -15,6 +15,7 @@
     "test:open": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@open",
     "test:onboarding": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@onboarding",
     "test:login": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@login",
+    "test:registration": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@registration",
     "allure:generate": "allure generate reports/allure-results --clean -o reports/allure-report",
     "allure:open": "allure open reports/allure-report"
   }

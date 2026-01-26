@@ -1,9 +1,21 @@
 {
-    "users": {
-        "admin": {
-        "email": "admin@icare.com",
-        "password": "admin123"
-        }
+    "validUser": {
+        "email": "jose.rojo@gmail.com",
+        "password": "Jose123="
+    },
+
+    "registrationUser": {
+        "firstName": "Juan",
+        "lastName": "Gomez",
+        "birthDate": "15071990",
+        "emailAddres": "juan.gomez@gmail.com",
+        "confirmEmail": "juan.gomez@gmail.com",
+        "mobileNumber": "3154275436",
+        "suburb": "bo",
+        "ndisNumber": "367567343236756",
+        "password": "Juan123=",
+        "confirmPassword": "Juan123="
+
     }
 
-}    
+}

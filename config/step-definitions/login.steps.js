@@ -5,6 +5,8 @@ const assert = require('assert');
 const LoginOnboardingScreen = require('../pageobjects/screens/LoginOnboardingScreen');
 const LoginScreen = require('../pageobjects/screens/LoginScreen');
 const NextScreen = require('../pageobjects/screens/NextScreen');
+const users = require('../testdata/users.json');
+
 
 // OJO: Debe coincidir exactamente con el texto del feature
 Given('The application is opened', async () => {
@@ -34,9 +36,7 @@ When('The user views the login screen', async () => {
 When('The user enters valid username and password', async () => {
   // Mejores prácticas: lee credenciales de variables de entorno o de un vault
   
-  const email = process.env.E2E_USER || 'jose.rojo@gmail.com';
-  const password = process.env.E2E_PASS || 'Jose123=';
-
+  const { email, password } = users.validUser;
   await LoginScreen.enterUsername(email);
   await LoginScreen.enterPassword(password);
   await LoginScreen.submitLogin();

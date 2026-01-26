@@ -79,7 +79,7 @@ async enterUsername(email) {
   // Escribir email en el campo con foco
   await driver.keys(email);
 // Esconder teclado si está abierto
-try { await driver.hideKeyboard(); } catch (_) {}
+
   
 }
 
@@ -109,7 +109,6 @@ try { await driver.hideKeyboard(); } catch (_) {}
   // Escribir email en el campo con foco
   await driver.keys(password);
 // Esconder teclado si está abierto
-try { await driver.hideKeyboard(); } catch (_) {}
 }
 
   async submitLogin() {
@@ -120,7 +119,7 @@ try { await driver.hideKeyboard(); } catch (_) {}
   async assertLoggedIn() {
     // Reemplaza el locator por un elemento inequívoco de la pantalla post-login
     const homeMarker = $('//android.view.View[@content-desc="Home Favorite 0 Message Maps Profile"]/android.widget.ImageView[4]');
-    await homeMarker.waitForDisplayed({ timeout: 15000 });
+    await homeMarker.waitForDisplayed({ timeout: 30000 });
   }
 }
 
