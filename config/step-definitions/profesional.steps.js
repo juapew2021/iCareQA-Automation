@@ -36,3 +36,103 @@ Given('The user chooses profesional account type', async () => {
   When('The user confirm that wants to create a new profesional account, then tap continue', async () => {
     await RegistrationScreen.tapContinueButton();
   });
+
+  When('The user scrolls and selects the {string} they want', async function (plan) {
+    this.plan = plan;
+    await ProfesionalAccountScreen.scrollToContinue();
+    await ProfesionalAccountScreen.tapChooseMembership();
+    if (plan === 'BASIC') {
+    await ProfesionalAccountScreen.tapPlan();
+      } else if (plan === 'STANDARD') {
+    await ProfesionalAccountScreen.tapPlan( 1417, 1041);
+      } else if (plan === 'PREMIUM') {
+    await ProfesionalAccountScreen.tapPlan( 2398, 1041);
+      }
+    await ProfesionalAccountScreen.scrollToContinue();
+    await RegistrationScreen.tapContinueButton();
+  });
+
+
+When('The user completes the first form', async function () {
+  const planMap = {
+    BASIC: 'professionalAccountBasic',
+    STANDARD: 'professionalAccountStandard',
+    PREMIUM: 'professionalAccountPremium'
+  };
+  const planKey = (this.plan || 'BASIC').trim().toUpperCase();
+  const userKey = planMap[planKey];
+  const userData = users[userKey];
+
+  await ProfesionalAccountScreen.enterFirstNameSpace(userData.firstName);
+  await ProfesionalAccountScreen.enterLastNameSpace(userData.lastName);
+  await ProfesionalAccountScreen.enterNameCompany(userData.companyName);
+  await ProfesionalAccountScreen.enterEmailAddress(userData.emailAddress);
+  await ProfesionalAccountScreen.enterConfirmEmailAddress(userData.confirmEmailAddress);
+  await ProfesionalAccountScreen.enterABN(userData.abn);
+  await ProfesionalAccountScreen.scrollToContinue();
+  await ProfesionalAccountScreen.enterMobileNumber(userData.mobileNumber);
+  await ProfesionalAccountScreen.enterSuburb(userData.suburb);
+  await ProfesionalAccountScreen.selectSuburb();
+  await RegistrationScreen.tapContinueButton();
+});
+
+
+When('The user completes the second form', async function () {
+  const planMap = {
+    BASIC: 'professionalAccountBasic',
+    STANDARD: 'professionalAccountStandard',
+    PREMIUM: 'professionalAccountPremium'
+  };
+  const planKey = (this.plan || 'BASIC').trim().toUpperCase();
+  const userKey = planMap[planKey];
+  const userData = users[userKey];
+
+  await ProfesionalAccountScreen.enterService();
+  await ProfesionalAccountScreen.enterTypeService();
+  await driver.back();
+  await ProfesionalAccountScreen.enterStatus();
+  await ProfesionalAccountScreen.enterTypeStatus();
+  await ProfesionalAccountScreen.enterAge();
+  await ProfesionalAccountScreen.enterTypeAge();
+  await ProfesionalAccountScreen.enterExperience(userData.experience);
+  await ProfesionalAccountScreen.enterPassword(userData.password);
+  await ProfesionalAccountScreen.scrollToContinue();
+  await ProfesionalAccountScreen.enterConfirmPassword(userData.confirmPassword);
+  await ProfesionalAccountScreen.enterCheckBox();
+  await RegistrationScreen.tapContinueButton();
+});
+
+When('The premium user selects the age and writes a brief description', async function () {
+  // Solo ejecuta este paso si el plan es PREMIUM
+  const planKey = (this.plan || 'BASIC').trim().toUpperCase();
+  if (planKey !== 'PREMIUM') return;
+
+  await ProfesionalAccountScreen.enterDescription('About me...');
+  await driver.pause(3000);
+  await ProfesionalAccountScreen.enterGender();
+  await ProfesionalAccountScreen.enterTypeGender();
+  await RegistrationScreen.tapContinueButton();
+  // Si necesitas escribir una descripción:
+  
+});
+
+  When ('The user selects how many working days they want', async () => {
+    await ProfesionalAccountScreen.selectMultipleWorkDaysMorning();
+    await ProfesionalAccountScreen.selectMultipleWorkDaysAfternoon();
+    await RegistrationScreen.tapContinueButton();
+  });
+
+  When ('The user must upload a profile photo', async () => {
+    await ProfesionalAccountScreen.selectPhoto();
+    await ProfesionalAccountScreen.selectPhoto( 2415, 621);
+    await ProfesionalAccountScreen.selectPhoto( 1608, 223);
+    await ProfesionalAccountScreen.enterCreateProfile();  
+  });
+
+  When ('The user must upload a video', async () => {
+    await ProfesionalAccountScreen.enterUploadVideo();
+    await ProfesionalAccountScreen.selectPhoto( 2415, 621);
+    await ProfesionalAccountScreen.selectPhoto( 1608, 223);
+    await driver.back(); 
+    await driver.pause(6000); 
+  });

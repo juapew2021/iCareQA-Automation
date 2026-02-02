@@ -150,7 +150,15 @@ exports.config = {
       }
     }
 
-    // 🗑️ Desinstalar app
-   
+    // Desinstalar app solo si el test pasó completamente
+    if (result && result.passed === true) {
+      try {
+        // Desinstala la app usando el método de Appium
+        await driver.removeApp(APP_PACKAGE);
+        console.log(`✅ App desinstalada: ${APP_PACKAGE}`);
+      } catch (e) {
+        console.warn('⚠️ No se pudo desinstalar la app:', e.message);
+      }
+    }
   },
 };

@@ -17,6 +17,9 @@
     "test:login": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@login",
     "test:registration": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@registration",
     "test:profesional": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@profesional", 
+    "test:basic": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@basic",
+    "test:standard": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@standard",
+    "test:premium": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@premium",
     "allure:generate": "allure generate reports/allure-results --clean -o reports/allure-report",
     "allure:open": "allure open reports/allure-report"
   }
