@@ -1,0 +1,57 @@
+{
+    "validUser": {
+        "email": "jose.rojo@gmail.com",
+        "password": "Jose123="
+    },
+    "registrationUser": {
+        "firstName": "Juan",
+        "lastName": "Gomez",
+        "birthDate": "15071990",
+        "emailAddres": "jose.gomez9@gmail.com",
+        "confirmEmail": "jose.gomez9@gmail.com",
+        "mobileNumber": "3154275436",
+        "suburb": "bo",
+        "ndisNumber": "367567343236756",
+        "password": "Juan123=",
+        "confirmPassword": "Juan123="
+    },
+    "professionalAccountBasic": {
+        "firstName": "Jorge",
+        "lastName": "Carrasco",
+        "companyName": "MatchPaw",
+        "emailAddress": "jorge.carrasco7@gmail.com",
+        "confirmEmailAddress": "jorge.carrasco7@gmail.com",
+        "abn": "54867546975",
+        "mobileNumber": "3108456432",
+        "suburb": "sidney",
+        "experience": "5",
+        "password": "Carlos123=",
+        "confirmPassword": "Carlos123="
+    },
+    "professionalAccountStandard": {
+        "firstName": "Clara",
+        "lastName": "Martinez",
+        "companyName": "CarePlus",
+        "emailAddress": "clara.martinez6@gmail.com",
+        "confirmEmailAddress": "clara.martinez6@gmail.com",
+        "abn": "12345678901",
+        "mobileNumber": "3201234567",
+        "suburb": "melbourne",
+        "experience": "3",
+        "password": "Ana12345=",
+        "confirmPassword": "Ana12345="
+    },
+    "professionalAccountPremium": {
+        "firstName": "Gerardo",
+        "lastName": "Bedoya",
+        "companyName": "HealthPro",
+        "emailAddress": "gerardo.bedoya1@gmail.com",
+        "confirmEmailAddress": "gerardo.bedoya1@gmail.com",
+        "abn": "98765432109",
+        "mobileNumber": "3009876543",
+        "suburb": "brisbane",
+        "experience": "10",
+        "password": "Luis12345=",
+        "confirmPassword": "Luis12345="
+    }
+}
