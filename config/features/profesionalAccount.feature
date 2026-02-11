@@ -18,6 +18,7 @@ Feature: Successful profesional account registration
     When The user selects how many working days they want
     When The user must upload a profile photo
     When The user must upload a video
+    Then The user views principal menu
 
   @standard
   Scenario: Successful profesional account registration STANDARD
@@ -29,6 +30,7 @@ Feature: Successful profesional account registration
     When The user selects how many working days they want
     When The user must upload a profile photo
     When The user must upload a video
+    Then The user views principal menu
 
   @premium
   Scenario: Successful profesional account registration PREMIUM
@@ -41,3 +43,4 @@ Feature: Successful profesional account registration
     When The user selects how many working days they want
     When The user must upload a profile photo
     When The user must upload a video
+    Then The user views principal menu

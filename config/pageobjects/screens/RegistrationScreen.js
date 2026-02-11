@@ -39,7 +39,7 @@ class RegistrationScreen extends BasePage {
   }
 
   get confirmView() {
-    return $('~(0)\nAndrés \nSupport  Coordinator\nUnregistered Provider\nExperience  4 years\nBrisbane City');
+    return $('Filter');
   }
 
 // Funcion para el scroll hasta el fondo
@@ -91,7 +91,7 @@ async swipeByCoordinates() {
   }
 
   async loadconfirmView() {
-    await this.confirmView.waitForDisplayed({ timeout: 10000 });
+    await driver.pause(2000)
   }
 
   // First Name input

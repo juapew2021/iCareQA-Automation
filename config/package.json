@@ -8,19 +8,22 @@
     "@wdio/spec-reporter": "^9.20.0",
     "@wdio/visual-service": "^9.1.0",
     "appium": "^3.1.2",
-    "appium-uiautomator2-driver": "^6.7.8"
+    "appium-uiautomator2-driver": "^6.7.8",
+    "rimraf": "^6.1.2"
   },
   "scripts": {
-    "wdio": "wdio run ./wdio.conf.js",
-    "test:open": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@open",
-    "test:onboarding": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@onboarding",
-    "test:login": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@login",
-    "test:registration": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@registration",
-    "test:profesional": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@profesional", 
-    "test:basic": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@basic",
-    "test:standard": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@standard",
-    "test:premium": "wdio run wdio.conf.js --cucumberOpts.tagExpression=@premium",
-    "allure:generate": "allure generate reports/allure-results --clean -o reports/allure-report",
-    "allure:open": "allure open reports/allure-report"
-  }
+  "wdio": "wdio run ./wdio.conf.js",
+  "clean:allure": "rimraf reports/allure-results",
+  "test:login": "npm run clean:allure && wdio run wdio.conf.js --cucumberOpts.tagExpression=@login && npm run allure:generate && npm run allure:open",
+  "test:open": "npm run clean:allure && wdio run wdio.conf.js --cucumberOpts.tagExpression=@open && npm run allure:generate && npm run allure:open",
+  "test:onboarding": "npm run clean:allure && wdio run wdio.conf.js --cucumberOpts.tagExpression=@onboarding && npm run allure:generate && npm run allure:open",
+  "test:registration": "npm run clean:allure && wdio run wdio.conf.js --cucumberOpts.tagExpression=@registration && npm run allure:generate && npm run allure:open",
+  "test:profesional": "npm run clean:allure && wdio run wdio.conf.js --cucumberOpts.tagExpression=@profesional && npm run allure:generate && npm run allure:open",
+  "test:basic": "npm run clean:allure && wdio run wdio.conf.js --cucumberOpts.tagExpression=@basic && npm run allure:generate && npm run allure:open",
+  "test:standard": "npm run clean:allure && wdio run wdio.conf.js --cucumberOpts.tagExpression=@standard && npm run allure:generate && npm run allure:open",
+  "test:premium": "npm run clean:allure && wdio run wdio.conf.js --cucumberOpts.tagExpression=@premium && npm run allure:generate && npm run allure:open",
+  "test:registration-login": "npm run clean:allure && wdio run wdio.conf.js --cucumberOpts.tagExpression='@registration or @login' && npm run allure:generate && npm run allure:open",
+  "allure:generate": "allure generate reports/allure-results --clean -o reports/allure-report",
+  "allure:open": "allure open reports/allure-report"
+}
 }

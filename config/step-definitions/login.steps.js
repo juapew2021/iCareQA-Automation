@@ -33,10 +33,24 @@ When('The user views the login screen', async () => {
     await NextScreen.assertForgotPasswordVisible(); // que tu método verifique que aparece el login screen
   });
 
+
+const fs = require('fs');
+const path = require('path');
+
 When('The user enters valid username and password', async () => {
-  // Mejores prácticas: lee credenciales de variables de entorno o de un vault
-  
-  const { email, password } = users.validUser;
+  // Leer credenciales del último usuario registrado
+  let email, password;
+  try {
+    const tempPath = path.join(__dirname, '../testdata/lastRegisteredUser.json');
+    const tempUser = JSON.parse(fs.readFileSync(tempPath, 'utf8'));
+    email = tempUser.email;
+    password = tempUser.password;
+  } catch (e) {
+    // Fallback a usuario por defecto
+    const { email: defaultEmail, password: defaultPassword } = users.validUser;
+    email = defaultEmail;
+    password = defaultPassword;
+  }
   await LoginScreen.enterUsername(email);
   await LoginScreen.enterPassword(password);
   await LoginScreen.submitLogin();
@@ -44,4 +58,13 @@ When('The user enters valid username and password', async () => {
 
 Then('The user should be logged in successfully', async () => {
   await NextScreen.assertViewProfileVisible();
+
+   // Tomar screenshot y adjuntar a Allure
+  const allure = require('@wdio/allure-reporter').default;
+  const screenshot = await browser.takeScreenshot();
+  allure.addAttachment(
+    'Pantallazo final - Login exitoso',
+    Buffer.from(screenshot, 'base64'),
+    'image/png'
+  );
 });

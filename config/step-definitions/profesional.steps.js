@@ -1,4 +1,4 @@
-const {Given, When, Then} = require('@wdio/cucumber-framework');
+const { Given, When, Then } = require('@wdio/cucumber-framework');
 const assert = require('assert');
 const LoginOnboardingScreen = require('../pageobjects/screens/LoginOnboardingScreen');
 const LoginScreen = require('../pageobjects/screens/LoginScreen');
@@ -14,44 +14,47 @@ Given('The application is opened profesional account', async () => {
 
 When('The user passes the {int} onboarding screens profesional account', async (times) => {
   await LoginOnboardingScreen.passScreens(times);
-}); 
+});
 
 When('The user views the home screen profesional account', async () => {
   await NextScreen.assertViewProfileVisible();
 });
 
-When ('The user navigates to the login screen profesional account', async () => {
+When('The user navigates to the login screen profesional account', async () => {
   await LoginScreen.goToLogin();
 });
 
-When ('The user creates a new account profesional account', async () => {
+When('The user creates a new account profesional account', async () => {
   await RegistrationScreen.tapCreateAccount();
-}); 
+});
 
 // Scenario steps
 Given('The user chooses profesional account type', async () => {
-    await ProfesionalAccountScreen.tapProfesionalAccount();
-  });
+  await ProfesionalAccountScreen.tapProfesionalAccount();
+});
 
-  When('The user confirm that wants to create a new profesional account, then tap continue', async () => {
-    await RegistrationScreen.tapContinueButton();
-  });
+When('The user confirm that wants to create a new profesional account, then tap continue', async () => {
+  await RegistrationScreen.tapContinueButton();
+});
 
-  When('The user scrolls and selects the {string} they want', async function (plan) {
-    this.plan = plan;
-    await ProfesionalAccountScreen.scrollToContinue();
-    await ProfesionalAccountScreen.tapChooseMembership();
-    if (plan === 'BASIC') {
+When('The user scrolls and selects the {string} they want', async function (plan) {
+  this.plan = plan;
+  await ProfesionalAccountScreen.scrollToContinue();
+  await ProfesionalAccountScreen.tapChooseMembership();
+  if (plan === 'BASIC') {
     await ProfesionalAccountScreen.tapPlan();
-      } else if (plan === 'STANDARD') {
-    await ProfesionalAccountScreen.tapPlan( 1417, 1041);
-      } else if (plan === 'PREMIUM') {
-    await ProfesionalAccountScreen.tapPlan( 2398, 1041);
-      }
-    await ProfesionalAccountScreen.scrollToContinue();
-    await RegistrationScreen.tapContinueButton();
-  });
+  } else if (plan === 'STANDARD') {
+    await ProfesionalAccountScreen.tapPlan(1417, 1041);
+  } else if (plan === 'PREMIUM') {
+    await ProfesionalAccountScreen.tapPlan(2398, 1041);
+  }
+  await ProfesionalAccountScreen.scrollToContinue();
+  await RegistrationScreen.tapContinueButton();
+});
 
+
+const fs = require('fs');
+const path = require('path');
 
 When('The user completes the first form', async function () {
   const planMap = {
@@ -62,6 +65,20 @@ When('The user completes the first form', async function () {
   const planKey = (this.plan || 'BASIC').trim().toUpperCase();
   const userKey = planMap[planKey];
   const userData = users[userKey];
+
+  // Incrementar el número del correo antes del @
+  function getNextEmail(email) {
+    return email.replace(/(\d+)?(?=@)/, (match) => match ? Number(match) + 1 : '1');
+  }
+  userData.emailAddress = getNextEmail(userData.emailAddress);
+  userData.confirmEmailAddress = userData.emailAddress;
+
+  // Actualizar users.json en disco
+  const usersPath = path.join(__dirname, '../testdata/users.json');
+  const usersFile = JSON.parse(fs.readFileSync(usersPath, 'utf8'));
+  usersFile[userKey].emailAddress = userData.emailAddress;
+  usersFile[userKey].confirmEmailAddress = userData.confirmEmailAddress;
+  fs.writeFileSync(usersPath, JSON.stringify(usersFile, null, 4));
 
   await ProfesionalAccountScreen.enterFirstNameSpace(userData.firstName);
   await ProfesionalAccountScreen.enterLastNameSpace(userData.lastName);
@@ -113,26 +130,40 @@ When('The premium user selects the age and writes a brief description', async fu
   await ProfesionalAccountScreen.enterTypeGender();
   await RegistrationScreen.tapContinueButton();
   // Si necesitas escribir una descripción:
-  
+
 });
 
-  When ('The user selects how many working days they want', async () => {
-    await ProfesionalAccountScreen.selectMultipleWorkDaysMorning();
-    await ProfesionalAccountScreen.selectMultipleWorkDaysAfternoon();
-    await RegistrationScreen.tapContinueButton();
-  });
+When('The user selects how many working days they want', async () => {
+  await ProfesionalAccountScreen.selectMultipleWorkDaysMorning();
+  await ProfesionalAccountScreen.selectMultipleWorkDaysAfternoon();
+  await RegistrationScreen.tapContinueButton();
+});
 
-  When ('The user must upload a profile photo', async () => {
-    await ProfesionalAccountScreen.selectPhoto();
-    await ProfesionalAccountScreen.selectPhoto( 2415, 621);
-    await ProfesionalAccountScreen.selectPhoto( 1608, 223);
-    await ProfesionalAccountScreen.enterCreateProfile();  
-  });
+When('The user must upload a profile photo', async () => {
+  await ProfesionalAccountScreen.selectPhoto();
+  await ProfesionalAccountScreen.selectPhoto(2415, 621);
+  await ProfesionalAccountScreen.selectPhoto(1608, 223);
+  await ProfesionalAccountScreen.enterCreateProfile();
+});
 
-  When ('The user must upload a video', async () => {
-    await ProfesionalAccountScreen.enterUploadVideo();
-    await ProfesionalAccountScreen.selectPhoto( 2415, 621);
-    await ProfesionalAccountScreen.selectPhoto( 1608, 223);
-    await driver.back(); 
-    await driver.pause(6000); 
+When('The user must upload a video', async () => {
+  await ProfesionalAccountScreen.enterUploadVideo();
+  await ProfesionalAccountScreen.selectPhoto(2415, 621);
+  await ProfesionalAccountScreen.selectPhoto(1608, 223);
+  await driver.back();
+  await driver.pause(6000);
+});
+
+Then('The user views principal menu', async () => {
+await driver.pause(1000);
+
+  // Tomar screenshot y adjuntar a Allure
+  const allure = require('@wdio/allure-reporter').default;
+  const screenshot = await browser.takeScreenshot();
+  allure.addAttachment(
+    'Registro exitoso',
+    Buffer.from(screenshot, 'base64'),
+    'image/png'
+  );
+
   });
